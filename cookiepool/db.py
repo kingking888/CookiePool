@@ -75,8 +75,36 @@ class RedisClient(object):
         """
         return self.db.hgetall(self.name())
 
+    def s_set(self, value):
+        """
+        设置cookie
+        :return: 用户名和密码或Cookies的映射表
+        """
+        return self.db.set(self.name(), value)
+
+    def s_get_random(self):
+        """
+        获取随机一个cookie
+        :return: 用户名和密码或Cookies的映射表
+        """
+        return self.db.srandmember(self.name())
+
+    def s_all(self):
+        """
+        获取全部cookies
+        :return: 用户名和密码或Cookies的映射表
+        """
+        return self.db.smembers(self.name())
+
+    def s_del(self, value):
+        """
+        获取删除一个cookie
+        :return: 用户名和密码或Cookies的映射表
+        """
+        return self.db.spop(value)
+
 
 if __name__ == '__main__':
-    conn = RedisClient('accounts', 'weibo')
-    result = conn.set('hell2o', 'sss3s')
+    conn = RedisClient('pechoin', 'cookies')
+    result = conn.set('百雀羚旗舰店:技术1', '8hsdghczplkjn,l')
     print(result)

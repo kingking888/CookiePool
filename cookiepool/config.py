@@ -10,16 +10,16 @@ REDIS_PASSWORD = None
 
 # 产生器类，如扩展其他站点，请在此配置
 GENERATOR_MAP = {
-    'taobao':'taobaoCookiesGenerator'
+    'pechoin':'taobaoCookiesGenerator'
 }
 
 # 测试类，如扩展其他站点，请在此配置
 TESTER_MAP = {
-    'taobao':'taobaoValidTester'
+    'pechoin':'taobaoValidTester'
 }
 
 TEST_URL_MAP = {
-    'taobao':'https://sycm.taobao.com/portal/home.htm'
+    'pechoin':'https://sycm.taobao.com/portal/home.htm'
 }
 
 # 产生器和验证器循环周期

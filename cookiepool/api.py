@@ -32,34 +32,29 @@ def random_cookie(website):
     :return: 随机Cookie
     """
     g = get_conn()
-    cookies = getattr(g, website + '_cookies').random()
+    cookies = getattr(g, website + '_cookies').s_get_random()
     return cookies
 
 
-@app.route('/<website>/add/<username>/<password>')
-def add(website, username, password):
-    """
-    添加用户, 访问地址如 /weibo/add/user/password
-    :param website: 站点
-    :param username: 用户名
-    :param password: 密码
-    :return: 
-    """
-    g = get_conn()
-    print(username, password)
-    getattr(g, website + '_accounts').set(username, password)
-    return json.dumps({'status': '1'})
-
-
-@app.route('/<website>/count')
-def count(website):
+@app.route('/<website>/delete/<cookie>')
+def all(website,cookie):
     """
     获取Cookies总数
     """
     g = get_conn()
-    count = getattr(g, website + '_cookies').count()
-    return json.dumps({'status': '1', 'count': count})
+    all = getattr(g, website + '_cookies').s_del(cookie)
+    return json.dumps({'status': '1', 'cookie': all})
+
+
+@app.route('/<website>/all')
+def all(website):
+    """
+    获取Cookies总数
+    """
+    g = get_conn()
+    all = getattr(g, website + '_cookies').s_all()
+    return json.dumps({'status': '1', 'count': all})
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='127.0.0.0')
