@@ -19,14 +19,14 @@ TESTER_MAP = {
 }
 
 TEST_URL_MAP = {
-    'pechoin':'https://sycm.taobao.com/portal/home.htm'
+    'pechoin':'https://sycm.taobao.com/custom/menu/getMenu.json'
 }
 
 # 产生器和验证器循环周期
 CYCLE = 120
 
 # API地址和端口
-API_HOST = '0.0.0.0'
+API_HOST = '127.0.0.1'
 API_PORT = 5000
 
 # 产生器开关，模拟登录添加Cookies

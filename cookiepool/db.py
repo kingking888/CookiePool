@@ -4,7 +4,7 @@ from cookiepool.config import *
 
 
 class RedisClient(object):
-    def __init__(self, type, website, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD):
+    def __init__(self, shop, type, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD):
         """
         初始化Redis连接
         :param host: 地址
@@ -12,15 +12,15 @@ class RedisClient(object):
         :param password: 密码
         """
         self.db = redis.StrictRedis(host=host, port=port, password=password, decode_responses=True)
+        self.shop = shop
         self.type = type
-        self.website = website
 
     def name(self):
         """
         获取Hash的名称
         :return: Hash名称
         """
-        return "{type}:{website}".format(type=self.type, website=self.website)
+        return "{shop}:{type}".format(shop=self.shop, type=self.type)
 
     def set(self, username, value):
         """
@@ -75,33 +75,6 @@ class RedisClient(object):
         """
         return self.db.hgetall(self.name())
 
-    def s_set(self, value):
-        """
-        设置cookie
-        :return: 用户名和密码或Cookies的映射表
-        """
-        return self.db.set(self.name(), value)
-
-    def s_get_random(self):
-        """
-        获取随机一个cookie
-        :return: 用户名和密码或Cookies的映射表
-        """
-        return self.db.srandmember(self.name())
-
-    def s_all(self):
-        """
-        获取全部cookies
-        :return: 用户名和密码或Cookies的映射表
-        """
-        return self.db.smembers(self.name())
-
-    def s_del(self, value):
-        """
-        获取删除一个cookie
-        :return: 用户名和密码或Cookies的映射表
-        """
-        return self.db.spop(value)
 
 
 if __name__ == '__main__':
