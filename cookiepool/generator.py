@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import logging
 import time
@@ -69,18 +70,18 @@ class CookiesGenerator(object):
                 # 成功获取
                 if result.get('status') == 1:
                     cookies = self.process_cookies(result.get('content'))
-                    print('成功获取到Cookies', cookies)
+                    print('sucess get Cookies', cookies)
                     if self.cookies_db.set(username, json.dumps(cookies)):
-                        print('成功保存Cookies{}'.format(username))
+                        print('success store Cookies{}'.format(username))
                 # 密码错误，移除账号
                 elif result.get('status') == 2:
                     print(result.get('content'))
                     if self.accounts_db.delete(username):
-                        print('成功删除账号')
+                        print('sucess delete account{}'.format(username))
                 else:
                     print(result.get('content'))
             else:
-                print('所有账号都已经成功获取Cookies')
+                print('all acounts get Cookies')
         self.close()
 
     def close(self):

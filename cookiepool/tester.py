@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import requests
 from requests.exceptions import ConnectionError
@@ -22,7 +23,7 @@ class ValidTester(object):
 if __name__ == "__main__":
     import time
     while True:
-        rep = requests.get('https://sycm.taobao.com/ucc/mc/notify/listNotify.json?groupCode=one_plat',
+        rep = requests.get('https://sycm.taobao.com/portal/live/overview.json',
         headers={
             'Connection': 'keep-alive',
             'Cache-Control': 'max-age=0',
@@ -31,7 +32,7 @@ if __name__ == "__main__":
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36',
             'Accept-Encoding': 'gzip, deflate',
             'Accept-Language': 'zh-CN,zh;q=0.8',
-            'cookie': 'cookie2=14063a46f720c6a585bc25625d87a773'
+            'cookie': 'cookie2=196f31a86bd804f41d5a55cf5d64b0ca; csg=0566d23d'
         })
         print(rep.text)
         time.sleep(120)

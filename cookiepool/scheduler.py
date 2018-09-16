@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import time
 from multiprocessing import Process
 
@@ -10,12 +11,12 @@ class Scheduler(object):
     @staticmethod
     def valid_cookie(cycle=CYCLE):
         while True:
-            print('Cookies检测进程开始运行')
+            print('Cookies----DECTTE----BEGIN')
             try:
                 for website, cls in TESTER_MAP.items():
                     tester = eval(cls + '(website="' + website + '")')
                     tester.run()
-                    print('Cookies检测完成')
+                    print('Cookies----DECETE----DONE')
                     del tester
                     time.sleep(cycle)
             except Exception as e:
@@ -24,12 +25,12 @@ class Scheduler(object):
     @staticmethod
     def generate_cookie(cycle=CYCLE):
         while True:
-            print('Cookies生成进程开始运行')
+            print('Cookies----PROCESS----BRGIN')
             try:
                 for website, cls in GENERATOR_MAP.items():
                     generator = eval(cls + '(website="' + website + '")')
                     generator.run()
-                    print('Cookies生成完成')
+                    print('Cookies----GENERATE----DONE')
                     generator.close()
                     time.sleep(cycle)
             except Exception as e:
@@ -37,7 +38,7 @@ class Scheduler(object):
     
     @staticmethod
     def api():
-        print('API接口开始运行')
+        print('API-----------BEGIN')
         app.run(host=API_HOST, port=API_PORT)
     
     def run(self):

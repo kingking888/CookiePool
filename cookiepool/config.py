@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 # Redis数据库地址
-REDIS_HOST = 'localhost'
+REDIS_HOST = '192.168.10.60'
 
 # Redis端口
 REDIS_PORT = 6379
@@ -26,7 +27,7 @@ TEST_URL_MAP = {
 CYCLE = 120
 
 # API地址和端口
-API_HOST = '127.0.0.1'
+API_HOST = '0.0.0.0'
 API_PORT = 5000
 
 # 产生器开关，模拟登录添加Cookies

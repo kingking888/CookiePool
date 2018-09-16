@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
 import requests
 
 from cookiepool.db import RedisClient
 
-conn = RedisClient('accounts', 'weibo')
+
 
 def set(account, sep='----'):
     username, password = account.split(sep)
@@ -21,4 +22,6 @@ def scan():
 
 
 if __name__ == '__main__':
+    shop = input("请输入店铺名")
+    conn = RedisClient('pechoin' , 'accounts')
     scan()
