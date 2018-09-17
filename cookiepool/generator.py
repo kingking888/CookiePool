@@ -34,7 +34,11 @@ class CookiesGenerator(object):
         通过browser参数初始化全局浏览器供模拟登录使用
         :return:
         """
-        self.browser = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        # options.add_argument('--no-sandbox')
+        options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        self.browser = webdriver.Chrome("chromedriver",0,options)
 
     def new_cookies(self, username, password=None):
         """
@@ -65,24 +69,28 @@ class CookiesGenerator(object):
         cookies_usernames = self.cookies_db.usernames()
         for username in accounts_usernames:
             if not username in cookies_usernames:
-                # password = self.accounts_db.get(username)
-                result = self.new_cookies(username)
-                # 成功获取
-                if result.get('status') == 1:
-                    cookies = self.process_cookies(result.get('content'))
-                    print('sucess get Cookies', cookies)
-                    if self.cookies_db.set(username, json.dumps(cookies)):
-                        print('success store Cookies{}'.format(username))
-                # 密码错误，移除账号
-                elif result.get('status') == 2:
-                    print(result.get('content'))
-                    if self.accounts_db.delete(username):
-                        print('sucess delete account{}'.format(username))
-                else:
-                    print(result.get('content'))
+                self.cookie_generate(username)
             else:
                 print('all acounts get Cookies')
         self.close()
+
+    def cookie_generate(self, username):
+        result = self.new_cookies(username)
+        # 成功获取
+        if result.get('status') == 1:
+            cookies = self.process_cookies(result.get('content'))
+            print('sucess get Cookies', cookies)
+            if self.cookies_db.set(username, json.dumps(cookies)):
+                print('success store Cookies{}'.format(username))
+        # 密码错误，移除账号
+        elif result.get('status') == 2:
+            print(result.get('content'))
+            if self.accounts_db.delete(username):
+                print('sucess delete account{}'.format(username))
+        else:
+            print(result.get('content'))
+        #     将所有cookies删除
+        self.browser.delete_all_cookies()
 
     def close(self):
         """
@@ -144,6 +152,7 @@ class taobaoCookiesGenerator(CookiesGenerator):
         sdata = {'spiderServerName': 'spider-10001', 'msg': username}
         response = requests.post(self.server_address, data=sdata, files=files)
         logger.info(response.status_code)
+
 
     def get_img_src(self):
         return WebDriverWait(self.browser, 10).until(

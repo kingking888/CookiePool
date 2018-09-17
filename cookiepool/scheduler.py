@@ -13,8 +13,8 @@ class Scheduler(object):
         while True:
             print('Cookies----DECTTE----BEGIN')
             try:
-                for website, cls in TESTER_MAP.items():
-                    tester = eval(cls + '(website="' + website + '")')
+                for shop, cls in TESTER_MAP.items():
+                    tester = eval(cls + '(shop="' + shop + '")')
                     tester.run()
                     print('Cookies----DECETE----DONE')
                     del tester
@@ -27,8 +27,8 @@ class Scheduler(object):
         while True:
             print('Cookies----PROCESS----BRGIN')
             try:
-                for website, cls in GENERATOR_MAP.items():
-                    generator = eval(cls + '(website="' + website + '")')
+                for shop, cls in GENERATOR_MAP.items():
+                    generator = eval(cls + '(shop="' + shop + '")')
                     generator.run()
                     print('Cookies----GENERATE----DONE')
                     generator.close()
