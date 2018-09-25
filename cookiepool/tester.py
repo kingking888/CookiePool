@@ -26,7 +26,7 @@ class taobaoValidTester(ValidTester):
         ValidTester.__init__(self, shop)
 
     def test(self, username, cookies):
-        print('detect {}'.format(username))
+        print(r'detect {}'.format('=========='))
         cookie = json.loads(cookies, encoding='utf-8')
         cookie2 = cookie.get('cookie2', None)
         csg = cookie.get('csg', None)
@@ -44,10 +44,13 @@ class taobaoValidTester(ValidTester):
         if rep.status_code == 200:
             rep = json.loads(rep.text, encoding='utf-8')
             if rep.get('code', None) == 5810:
-                print('delete cookie {}'.format(username))
-                self.cookies_db.delete(username)
+                # print('delete cookie {}'.format(username))
+                print('delete........................')
+                code = self.cookies_db.delete(username)
+                print('delete....................done{}',format(code))
+
 
 
 if __name__ == "__main__":
-    ss = taobaoValidTester(shop='pechoin')
+    ss = taobaoValidTester(shop='test')
     ss.run()

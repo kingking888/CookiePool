@@ -11,7 +11,9 @@ REDIS_PASSWORD = None
 
 # 产生器类，如扩展其他站点，请在此配置
 GENERATOR_MAP = {
-    'pechoin':'taobaoCookiesGenerator'
+    'pechoin':'taobaoCookiesGenerator',
+    'test':'taobaoCookiesGenerator'
+
 }
 
 # 测试类，如扩展其他站点，请在此配置

@@ -130,7 +130,7 @@ class taobaoCookiesGenerator(CookiesGenerator):
         self.browser.get(self.login_address)
         count = 0
         while self.success_address not in self.browser.current_url:
-            logger.info('登陆中')
+            logger.info('waiting')
             if count % 18 == 0:
                 try:
                     self.qr_process(username)
