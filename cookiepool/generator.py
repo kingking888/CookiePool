@@ -81,12 +81,12 @@ class CookiesGenerator(object):
             cookies = self.process_cookies(result.get('content'))
             print('sucess get Cookies', cookies)
             if self.cookies_db.set(username, json.dumps(cookies)):
-                print('success store Cookies{}'.format(username))
+                print('success store Cookies')
         # 密码错误，移除账号
         elif result.get('status') == 2:
             print(result.get('content'))
             if self.accounts_db.delete(username):
-                print('sucess delete account{}'.format(username))
+                print('sucess delete account')
         else:
             print(result.get('content'))
         #     将所有cookies删除
