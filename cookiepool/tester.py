@@ -44,11 +44,9 @@ class taobaoValidTester(ValidTester):
         if rep.status_code == 200:
             rep = json.loads(rep.text, encoding='utf-8')
             if rep.get('code', None) == 5810:
-                # print('delete cookie {}'.format(username))
                 print('delete........................')
                 code = self.cookies_db.delete(username)
                 print('delete....................done{}',format(code))
-
 
 
 if __name__ == "__main__":
